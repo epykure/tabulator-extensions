@@ -4,7 +4,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     // Change the CSS Style for a given cell
     // formatterParams:
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
-    style: function(cell, formatterParams){
+    cssStyle: function(cell, formatterParams){
         var value = cell.getValue();
         if (typeof formatterParams.css !== 'undefined'){
             Object.keys(value[formatterParams.cssField]).forEach(function(key){
