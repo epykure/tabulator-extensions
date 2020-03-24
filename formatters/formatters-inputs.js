@@ -1,6 +1,22 @@
 
 Tabulator.prototype.extendModule("format", "formatters", {
 
+    // Change the CSS Style for a given cell
+    // formatterParams:
+    //      - css: Dictionary. The CSS attributes for the cell (Optional)
+    style: function(cell, formatterParams){
+        var value = cell.getValue();
+        if (typeof formatterParams.css !== 'undefined'){
+            Object.keys(value[formatterParams.cssField]).forEach(function(key){
+                    cell.getElement().style[key] = value[formatterParams.cssField][key]})};
+            value = value[formatterParams.valField];
+        } else {
+            Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]})};
+        }
+        return value;
+    },
+
     // Change the content of the cell to ****
     // formatterParams:
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
