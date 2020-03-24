@@ -6,14 +6,13 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
     cssStyle: function(cell, formatterParams){
         var value = cell.getValue();
-        if (typeof formatterParams.css !== 'undefined'){
+        if (typeof formatterParams.cssField !== 'undefined'){
             Object.keys(value[formatterParams.cssField]).forEach(function(key){
-                    cell.getElement().style[key] = value[formatterParams.cssField][key]})};
+                    cell.getElement().style[key] = value[formatterParams.cssField][key]});
             value = value[formatterParams.valField];
         } else {
             Object.keys(formatterParams.css).forEach(function(key){
-                    cell.getElement().style[key] = formatterParams.css[key]})};
-        }
+                    cell.getElement().style[key] = formatterParams.css[key]})}
         return value;
     },
 
