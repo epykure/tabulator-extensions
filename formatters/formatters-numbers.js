@@ -59,12 +59,12 @@ Tabulator.prototype.extendModule("format", "formatters", {
                 cell.getElement().style[key] = formatterParams.css[key] }) }
 
         //
-        const params = Object.assign({}, {"format": {'pos': "%v", 'neg': "(%v)", 'zero': " -- "}, formatterParams);
+        const params = Object.assign({}, {"format": {'pos': "%v", 'neg': "(%v)", 'zero': " -- "}}, formatterParams);
         if (typeof formatterParams.colors !== 'undefined'){
                 const threshold = (typeof formatterParams.threshold !== 'undefined')? 0: formatterParams.threshold;
                 if (cell.getValue() < threshold){ cell.getElement().style.color = formatterParams.colors[0] }
                 else { cell.getElement().style.color = formatterParams.colors[1] }}
-        return accounting.formatMoney(cell.getValue(), params});
+        return accounting.formatMoney(cell.getValue(), params);
     },
 
     //

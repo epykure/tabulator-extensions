@@ -16,6 +16,20 @@ Tabulator.prototype.extendModule("format", "formatters", {
         return value;
     },
 
+    //
+    // formatterParams:
+    //      - css:
+    //      - cssField:
+    //      - cssMapping:
+    //
+    cssStylePivot: function(cell, formatterParams){
+        var value = cell.getValue();
+        if (typeof formatterParams.cssField !== 'undefined'){ value = cell.getRow().getData()[formatterParams.pivot]; }
+        if (value in formatterParams.cssMapping){
+            Object.keys(formatterParams.cssMapping[value]).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.cssMapping[value][key]})}
+        return value;
+    },
     // Change the content of the cell to ****
     // formatterParams:
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
