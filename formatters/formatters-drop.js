@@ -7,7 +7,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     **/
     dragAndDrop: function(cell, formatterParams){
       var cellElement = cell.getElement();
-      if (typeof formatterParams.css !== 'undefined'){
+      if ((typeof formatterParams.css !== 'undefined') && (formatterParams.css != null)){
         // Update the CSS Style attributes
         Object.keys(formatterParams.css).forEach(function(key){
             cell.getElement().style[key] = formatterParams.css[key]})}
@@ -22,7 +22,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
             if(c.getColumn().getField() == cell.getColumn().getField() ) { pos = i } });
 
           event.dataTransfer.getData("text").trim().split(formatterParams.rowDelimiter).forEach(function(line){
-            line.trim().split(colDelimiter).forEach(function(v, j){ cells[pos + j].setValue(v) });
+            line.trim().split(formatterParams.colDelimiter).forEach(function(v, j){ cells[pos + j].setValue(v) });
             row = row.getNextRow(); cells = row.getCells();
           })
         }
@@ -30,4 +30,5 @@ Tabulator.prototype.extendModule("format", "formatters", {
      );
      return cell.getValue();
    }
-}
+
+})
