@@ -2,7 +2,7 @@
 
 Tabulator.prototype.extendModule("edit", "editors", {
 
-    inputPlus:function(cell, onRendered, success, cancel, editorParams){
+  inputPlus:function(cell, onRendered, success, cancel, editorParams){
       var cellValue = cell.getValue(), input = document.createElement("input");
       input.setAttribute("type", "text");
       for (var k in editorParams){input.setAttribute(k, editorParams[k])};
