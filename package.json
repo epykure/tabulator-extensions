@@ -1,0 +1,30 @@
+{
+  "name": "@epyk/tabulator-extensions",
+  "version": "0.0.2",
+  "description": "Set of Editors, Formatters and Validators for Tabulator ",
+  "main": "index.js",
+  "dependencies": {
+    "tabulator": "^0.2.40"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epykure/tabulator-extensions.git"
+  },
+  "keywords": [
+    "Tabulator",
+    "Formatters",
+    "Editors",
+    "Validators"
+  ],
+  "author": "Epykure",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/epykure/tabulator-extensions/issues"
+  },
+  "homepage": "https://github.com/epykure/tabulator-extensions#readme"
+}
