@@ -1,5 +1,5 @@
 {
-  "name": "@epyk/tabulator-extensions",
+  "name": "tabulator-extensions",
   "version": "0.0.2",
   "description": "Set of Editors, Formatters and Validators for Tabulator ",
   "main": "index.js",
