@@ -1,7 +1,7 @@
 
 # Tabulator extensions
 
-A set of bespoke components for tabulators in order to 
+A set of components for tabulators in order to customise the display of columns and cells
 
 Those components are maintained by Epyk Team and they are designed to work with the Python Epyk-ui.
 The goal of this project being to extend the rich Python ecosystem with selected JavaScript features and render modern and interactive pages.
