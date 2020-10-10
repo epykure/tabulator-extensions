@@ -1,21 +1,21 @@
 
 # Tabulator extensions
 
-A set of components for tabulators in order to customise the display of columns and cells
+A set of components for Tabulator in order to customise the display of columns and cells.
 
 Those components are maintained by Epyk Team and they are designed to work with the Python Epyk-ui.
 The goal of this project being to extend the rich Python ecosystem with selected JavaScript features and render modern and interactive pages.
 
 ![](https://raw.githubusercontent.com/epykure/epyk-ui/master/epyk/static/images/epyklogo_whole_big.png)
 
-If you are interested in this project please have a look at the below repositories
+If you are interested in this project please have a look at the below repositories:
 - [Epyk-ui](https://github.com/epykure/epyk-ui)
 - [Epyk-studio](https://github.com/epykure/epyk-studio)
 
 
 Presentation
 ================================
-This repository will provide some pre defined Formatters, Editors and Mutators for Tabulators.
+This repository will provide some pre-defined Formatters, Editors and Mutators for Tabulator.
 Those bespoke components need to be integrated to your project in a traditional way and they will enrich the scope of features 
 already available in Tabulator.
 
@@ -26,7 +26,7 @@ The documentation is really good and the set of examples allow to understand qui
 Quickstart
 ================================
 
-From HTML / Javascript
+From HTML / Javascript:
 
 ```html
 <script language="javascript" type="text/javascript" src="https://unpkg.com/tabulator-tables@4.8.2/dist/js/tabulator.min.js"></script>
@@ -41,7 +41,7 @@ var table_2005485509544_obj =  new Tabulator("#table_2005485509544", {layout: "f
 </script>
 ```
 
-From Python using Epyk
+From Python using Epyk:
 
 ```py
 from epyk_studio.core.Page import Report
@@ -54,7 +54,7 @@ table.get_column("rating").exts.formatters.style({"color": 'blue'})
 table.get_column("change").exts.formatters.number(precision=6)
 ```
 
-In a static web page
+In a static web page:
 
 #### Client side
 
@@ -74,7 +74,7 @@ page.ui.button("click").click([
 
 #### Server Side
 
-In a dynamic web page (using Flask)
+In a dynamic web page (using Flask):
 
 ```py
 import random
@@ -106,16 +106,15 @@ Usage
 This package contains the below features and they can be used like any
 standard Tabulator object supplying the expected set of parameters.
 
-Those features are groups in each files per type of object.
+Those features are grouped per file and type of object.
 
 ### Editors
 
 #### Dates
 
-<code><i>datePlus</i></code>: This will display a proper DatePicker object in the same using as underlying component 
-Jquery UI. 
+<code><i>datePlus</i></code>: This will display a proper DatePicker object in a cell, using Jquery UI library. 
 
-*Epyk is importing the dependancies on the fly on the Js side please make sure the import is satisfyed.*
+*Epyk is importing the dependancies on the fly on the Js side - please make sure the import is satisfyed.*
 
 #### Inputs
 
@@ -166,7 +165,7 @@ This is a way to have shortcuts for K, M factors.
 Those Formmatters will use as underlying package the **accounting.js** module.
 
 Namely the below formatter parameters can be supplied in order to benefit from the various features available in this library.
-For more details about the Accounting library, please have a look at the [official website](http://openexchangerates.github.io/accounting.js/)
+For more details about the Accounting library, please have a look at the [official website](http://openexchangerates.github.io/accounting.js/).
  - css: Dictionary. The CSS attributes for the cell (Optional)
  - decimal: String. decimal point separator default "."
  - thousand: String. thousands separator default ","
@@ -222,7 +221,7 @@ Tips
 ==================
 If you want to surcharge an existing feature without having to reimplement the entiere component you can do the below:
 
-For example the below will change the return cell object and add extra CSS styles
+For example the below will change the return cell object and add extra CSS styles:
 ```js
 function(cell, formatterParams){ 
     const cssAttrs = formatterParams.css;
@@ -243,13 +242,13 @@ Next features
 
 More features will be implemented in this package to:
 - make visible data overrides
-- 
+ 
 
 
 Contributing
 ==================
 
-All those projects are collaborative projects so please feel free to give your feedbacks but also to help improve its by fixing bugs and
+All those projects are collaborative projects so please feel free to give your feedbacks but also to help improve it by fixing bugs and
 bringing new ideas. This will benefit both the JavaScript ecosystem but also the Python community using Epyk to generate 
 websites.
 
