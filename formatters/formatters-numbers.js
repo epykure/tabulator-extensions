@@ -12,6 +12,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //      - format: String. "%s%v" controls output: %s = symbol, %v = value/number (can be object: see below)
     //
     numbers: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
@@ -29,6 +30,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //      - format: String. "%s%v" controls output: %s = symbol, %v = value/number (can be object: see below)
     //
     numbersFormat: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
@@ -53,6 +55,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //      - format: String. "%s%v" controls output: %s = symbol, %v = value/number (can be object: see below)
     //
     numbersDifference: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
@@ -70,6 +73,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //
     //
     numbersThreshold: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             //
             Object.keys(formatterParams.css).forEach(function(key){
@@ -105,6 +109,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //      - thresholds:
     //      - css:
     numbersThresholdPivot: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             //
             Object.keys(formatterParams.css).forEach(function(key){
@@ -139,6 +144,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     // formatterParams:
     //
     numbersIntensity: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
@@ -148,6 +154,9 @@ Tabulator.prototype.extendModule("format", "formatters", {
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
         const value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
         cell.getElement().style.backgroundColor = colorFnc(value);
+        if (formatterParams.is_number){
+            return accounting.formatMoney(cell.getValue(), formatterParams)}
+
         return cell.getValue();
     },
 
@@ -156,6 +165,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     // formatterParams:
     //
     numbersQuality: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
@@ -176,8 +186,35 @@ Tabulator.prototype.extendModule("format", "formatters", {
         div.style.width = "100%";
         div.style.backgroundColor = colorFnc(value);
         div.style.border = "3px solid " + colorFnc2(value);
-        div.innerHTML = cell.getValue()
+
+        if (formatterParams.is_number){
+            div.innerHTML = accounting.formatMoney(cell.getValue(), formatterParams)}
+        else {div.innerHTML = cell.getValue()}
+        return div;
+    },
+
+    //
+    //
+    // formatterParams:
+    //
+    trafficLight: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'center';
+        if (typeof formatterParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(formatterParams.css).forEach(function(key){
+                cell.getElement().style[key] = formatterParams.css[key] }) }
+
+        const div = document.createElement('div');
+        if (cell.getValue() === null){
+            div.style.backgroundColor = formatterParams.orange}
+        else{
+            if(cell.getValue()){div.style.backgroundColor = formatterParams.green}
+            else{div.style.backgroundColor = formatterParams.red}
+        }
+        div.style.borderRadius = '20px';
+        div.style.margin = "auto";
+        div.style.width = '20px';
+        div.style.height = '20px';
         return div;
     }
-
 });
