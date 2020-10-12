@@ -20,6 +20,18 @@ Tabulator.prototype.extendModule("format", "formatters", {
         return accounting.formatMoney(cell.getValue(), formatterParams);
     },
 
+    //
+    //
+    numbersPrevious: function(cell, formatterParams){
+        cell.getElement().style["text-align"] = 'right';
+        cell.getElement().style["font-style"] = 'italic';
+        if (typeof formatterParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(formatterParams.css).forEach(function(key){
+                cell.getElement().style[key] = formatterParams.css[key] }) }
+        return accounting.formatMoney(cell.getValue(), formatterParams);
+    },
+
     // Format the Number as a currency with default formattings
     // formatterParams:
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
@@ -211,6 +223,8 @@ Tabulator.prototype.extendModule("format", "formatters", {
             if(cell.getValue()){div.style.backgroundColor = formatterParams.green}
             else{div.style.backgroundColor = formatterParams.red}
         }
+        if (formatterParams.tooltip != null){
+            div.setAttribute('title', cell.getRow().getData()[formatterParams.tooltip])}
         div.style.borderRadius = '20px';
         div.style.margin = "auto";
         div.style.width = '20px';
