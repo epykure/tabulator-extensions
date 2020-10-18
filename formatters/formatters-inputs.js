@@ -30,6 +30,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
                     cell.getElement().style[key] = formatterParams.cssMapping[value][key]})}
         return value;
     },
+
     // Change the content of the cell to ****
     // formatterParams:
     //      - css: Dictionary. The CSS attributes for the cell (Optional)
