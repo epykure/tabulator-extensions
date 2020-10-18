@@ -17,6 +17,10 @@ Tabulator.prototype.extendModule("format", "formatters", {
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
                 cell.getElement().style[key] = formatterParams.css[key] }) }
+        //
+        if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
+        if(typeof formatterParams.precision === "undefined"){formatterParams.precision = 0};
+        if(typeof formatterParams.thousand === "undefined"){formatterParams.thousand = ","};
         return accounting.formatMoney(cell.getValue(), formatterParams);
     },
 
@@ -29,6 +33,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
             // Update the CSS Style attributes
             Object.keys(formatterParams.css).forEach(function(key){
                 cell.getElement().style[key] = formatterParams.css[key] }) }
+        if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
         return accounting.formatMoney(cell.getValue(), formatterParams);
     },
 
@@ -167,6 +172,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
         const value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
         cell.getElement().style.backgroundColor = colorFnc(value);
         if (formatterParams.is_number){
+            if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
             return accounting.formatMoney(cell.getValue(), formatterParams)}
 
         return cell.getValue();
@@ -200,6 +206,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
         div.style.border = "3px solid " + colorFnc2(value);
 
         if (formatterParams.is_number){
+            if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
             div.innerHTML = accounting.formatMoney(cell.getValue(), formatterParams)}
         else {div.innerHTML = cell.getValue()}
         return div;
