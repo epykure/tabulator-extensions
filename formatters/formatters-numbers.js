@@ -320,6 +320,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     // Change the background color of the cell according to a metric defined in the value
     // This can be the value itself (default case) or some other columns in the row dictionary
     // formatterParams:
+    //      - factor:
     //
     numbersIntensity: function(cell, formatterParams){
         cell.getElement().style["text-align"] = 'right';
@@ -331,6 +332,9 @@ Tabulator.prototype.extendModule("format", "formatters", {
         }
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
         const value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
+
+        //
+        if(typeof formatterParams.factor !== "undefined"){value = value * formatterParams.factor};
         cell.getElement().style.backgroundColor = colorFnc(value);
         if (formatterParams.is_number){
             if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
@@ -342,6 +346,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //
     //
     // formatterParams:
+    //      - factor:
     //
     numbersQuality: function(cell, formatterParams){
         cell.getElement().style["text-align"] = 'right';
@@ -357,6 +362,9 @@ Tabulator.prototype.extendModule("format", "formatters", {
         const colorFnc2 = (typeof formatterParams.colors2 !== 'undefined') ? d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors2) : colorFnc;
         const value2 = (typeof formatterParams.quality === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.quality]
 
+        if(typeof formatterParams.factor !== "undefined"){
+            value = value * formatterParams.factor; value2 = value2 * formatterParams.factor
+        }
         cell.getElement().style.padding = 0;
 
         const div = document.createElement('div');
