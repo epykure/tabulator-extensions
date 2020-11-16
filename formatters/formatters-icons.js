@@ -26,7 +26,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
             Object.keys(formatterParams.tags).forEach(function(key){
                 iconHolder.setAttribute(key, formatterParams.tags[key])})}
 
-        //
+        // Add events to the cell
         if (typeof formatterParams.events !== 'undefined'){
             Object.keys(formatterParams.events).forEach(function(key){
                 iconHolder.addEventListener(key, eval('(function(){var data = cell.getRow().getData() ; '+ formatterParams.events[key] +'})'))})}
