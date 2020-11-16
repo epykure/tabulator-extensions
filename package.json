@@ -1,6 +1,6 @@
 {
   "name": "tabulator-extensions",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Set of Editors, Formatters and Validators for Tabulator ",
   "main": "index.js",
   "dependencies": {
