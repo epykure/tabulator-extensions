@@ -331,7 +331,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
             })
         }
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
-        const value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
+        var value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
 
         //
         if(typeof formatterParams.factor !== "undefined"){value = value * formatterParams.factor};
@@ -357,10 +357,10 @@ Tabulator.prototype.extendModule("format", "formatters", {
             })
         }
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
-        const value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
+        var value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
 
         const colorFnc2 = (typeof formatterParams.colors2 !== 'undefined') ? d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors2) : colorFnc;
-        const value2 = (typeof formatterParams.quality === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.quality]
+        var value2 = (typeof formatterParams.quality === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.quality]
 
         if(typeof formatterParams.factor !== "undefined"){
             value = value * formatterParams.factor; value2 = value2 * formatterParams.factor

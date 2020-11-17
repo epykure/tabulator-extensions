@@ -2,6 +2,55 @@
 
 Tabulator.prototype.extendModule("edit", "editors", {
 
+   //
+   //
+   //  - editorParams: a list or a dictionary like {"options": [], tags: {}, css: {}}
+   //  TODO: Fix the problem with the bootstrap module
+   //
+   jqSelect: function(cell, onRendered, success, cancel, editorParams){
+        var cellValue = cell.getValue(); var mappedValue = "";
+        var editorItems = editorParams.default; var row = cell.getRow().getData();
+        for (k in editorParams){editorItems = editorParams[k]};
+        var select = document.createElement("select");
+        if(Array.isArray(editorParams)){
+          editorParams.forEach(function(k){
+            var option = document.createElement("option"); option.text = k; option.value = k;
+            if (cellValue == k){ option.selected = true};
+            select.add(option)})
+        }else{
+          for (k in editorParams.options){
+            var option = document.createElement("option"); option.text = editorParams.options[k]; option.value = k;
+            if (cellValue == k){ option.selected = true};
+            select.add(option)}
+        }
+
+        select.style.padding = "4px";
+        select.style.width = "100%";
+        select.style.color = "black";
+        select.style.textAlign = "center";
+        select.style.boxSizing = "border-box";
+
+        if (typeof editorParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(editorParams.css).forEach(function(key){
+                cell.getElement().style[key] = editorParams.css[key]})}
+
+        if (typeof editorParams.tags !== 'undefined'){
+            Object.keys(editorParams.tags).forEach(function(key){
+                select.setAttribute(key, editorParams.tags[key])})}
+
+        onRendered(function(){
+            $(select).selectpicker();
+            select.style.color = 'inherit';
+
+        });
+        return select;
+   },
+
+   //
+   //
+   //  - editorParams: a list or a dictionary like {"options": [], tags: {}, css: {}}
+   //
    selectPlus: function(cell, onRendered, success, cancel, editorParams){
         var cellValue = cell.getValue(); var mappedValue = "";
         var editorItems = editorParams.default; var row = cell.getRow().getData();
@@ -14,8 +63,8 @@ Tabulator.prototype.extendModule("edit", "editors", {
             option.style.color = 'black';
             select.add(option)})
         }else{
-          for (k in editorParams){
-            var option = document.createElement("option"); option.text = editorParams[k]; option.value = k;
+          for (k in editorParams.options){
+            var option = document.createElement("option"); option.text = editorParams.options[k]; option.value = k;
             if (cellValue == k){ option.selected = true};
             option.style.color = 'black';
             select.add(option)}
@@ -26,6 +75,15 @@ Tabulator.prototype.extendModule("edit", "editors", {
         select.style.color = "black";
         select.style.textAlign = "center";
         select.style.boxSizing = "border-box";
+
+        if (typeof editorParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(editorParams.css).forEach(function(key){
+                cell.getElement().style[key] = editorParams.css[key]})}
+
+        if (typeof editorParams.tags !== 'undefined'){
+            Object.keys(editorParams.tags).forEach(function(key){
+                select.setAttribute(key, editorParams.tags[key])})}
 
         onRendered(function(){select.focus();
           select.style.color = 'inherit'});
@@ -39,7 +97,10 @@ Tabulator.prototype.extendModule("edit", "editors", {
         return select;
    },
 
-   selectConditiions: function(cell, onRendered, success, cancel, editorParams){
+   //
+   //
+   //
+   selectConditions: function(cell, onRendered, success, cancel, editorParams){
         var editorItems = editorParams.default; var row = cell.getRow().getData();
         for (k in editorParams.values){
           if (row[editorParams.key] == k){
@@ -53,6 +114,16 @@ Tabulator.prototype.extendModule("edit", "editors", {
         select.style.padding = "4px";
         select.style.width = "100%";
         select.style.boxSizing = "border-box";
+
+        if (typeof editorParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(editorParams.css).forEach(function(key){
+                cell.getElement().style[key] = editorParams.css[key]})}
+
+        if (typeof editorParams.tags !== 'undefined'){
+            Object.keys(editorParams.tags).forEach(function(key){
+                select.setAttribute(key, editorParams.tags[key])})}
+
         select.value = cell.getValue();
         onRendered(function(){select.focus()});
         select.onchange = function(){success(this.value); cell.getElement().focus()};
@@ -61,6 +132,9 @@ Tabulator.prototype.extendModule("edit", "editors", {
         else{ return select}
     },
 
+   //
+   //
+   //
    selectMultiConditions: function(cell, onRendered, success, cancel, editorParams){
         var editorItems = editorParams.default; var row = cell.getRow().getData();
         var itemFound = false;
@@ -78,6 +152,16 @@ Tabulator.prototype.extendModule("edit", "editors", {
         select.style.padding = "4px";
         select.style.width = "100%";
         select.style.boxSizing = "border-box";
+
+        if (typeof editorParams.css !== 'undefined'){
+            // Update the CSS Style attributes
+            Object.keys(editorParams.css).forEach(function(key){
+                cell.getElement().style[key] = editorParams.css[key]})}
+
+        if (typeof editorParams.tags !== 'undefined'){
+            Object.keys(editorParams.tags).forEach(function(key){
+                select.setAttribute(key, editorParams.tags[key])})}
+
         select.value = cell.getValue();
         onRendered(function(){select.focus()});
         select.onchange = function(){success(this.value); cell.getElement().focus()};
