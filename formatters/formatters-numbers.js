@@ -83,7 +83,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
         var moveVal; var cellVal; var cellFlag;
         if(typeof formatterParams.flag !== "undefined"){cellFlag = cell.getRow().getData()[formatterParams.flag]} else {cellFlag = cell.getValue().flag}
         if(typeof formatterParams.move !== "undefined"){moveVal = cell.getRow().getData()[formatterParams.move]} else {moveVal = cell.getValue().move}
-        if(typeof formatterParams.value !== "undefined"){cellVal = cell.getValue()} else {cellVal = cell.getValue().value}
+        if(typeof formatterParams.value !== "undefined"){cellVal = cell.getRow().getData()[formatterParams.value]} else {cellVal = cell.getValue().value}
         const value = document.createElement('div');
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
