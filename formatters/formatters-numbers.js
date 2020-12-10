@@ -15,8 +15,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] })}}
         //
         if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
         if(typeof formatterParams.precision === "undefined"){formatterParams.precision = 0};
@@ -33,9 +39,15 @@ Tabulator.prototype.extendModule("format", "formatters", {
     //
     trend: function(cell, formatterParams, onRendered){
         if (typeof formatterParams.css !== 'undefined'){
-                // Update the CSS Style attributes
-                Object.keys(formatterParams.css).forEach(function(key){
-                    cell.getElement().style[key] = formatterParams.css[key] }) }
+            // Update the CSS Style attributes
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+            Object.keys(formatterParams.css).forEach(function(key){
+                cell.getElement().style[key] = formatterParams.css[key] }) }}
         const div = document.createElement('div');
         div.style.width = 10 + "px" ;
         div.style.margin = "auto" ;
@@ -85,10 +97,17 @@ Tabulator.prototype.extendModule("format", "formatters", {
         if(typeof formatterParams.move !== "undefined"){moveVal = cell.getRow().getData()[formatterParams.move]} else {moveVal = cell.getValue().move}
         if(typeof formatterParams.value !== "undefined"){cellVal = cell.getRow().getData()[formatterParams.value]} else {cellVal = cell.getValue().value}
         const value = document.createElement('div');
+        cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]})}}
 
         if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
         if(typeof formatterParams.precision === "undefined"){formatterParams.precision = 0};
@@ -106,16 +125,19 @@ Tabulator.prototype.extendModule("format", "formatters", {
             if (cellFlag == 1){flag.style["background"] = "#006100"}
             else if (cellFlag == 2){flag.style["background"] = "#FF9900"}
             else {flag.style["background"] = "#9C0006"}}
-        flag.style.marginRight = "20px";
         flag.style.height = "10px";
         flag.style.border = "1px solid grey";
-        flag.style.verticalAlign = "sub";
+        flag.style.verticalAlign = "middle";
         flag.style.borderRadius = "10px";
+        if(typeof cell.getRow().tooltip !== "undefined"){
+            flag.setAttribute('title', cell.getRow().tooltip)
+        }
         const move = document.createElement('div');
         if (typeof moveVal !== "undefined"){
             move.innerHTML = moveVal;
         }
         move.style.fontSize = "8px";
+        move.style.width = "20px";
         move.style.display = "inline-block";
 
         div.appendChild(value);
@@ -136,8 +158,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
     small: function(cell, formatterParams){
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]})}
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]})}}
 
         const div = document.createElement('div');
         if (typeof cell.getValue() !== "undefined"){
@@ -164,10 +192,15 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]
-            })
-        }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]
+                })}}
         var colorsNeg = (typeof formatterParams.colors === 'undefined') ? ["#FFFFFF", "#C00000"]: ["#FFFFFF", formatterParams.colors[0]];
         var colorsPos = (typeof formatterParams.colors === 'undefined') ? ["#FFFFFF", "#3bb194"]: ["#FFFFFF", formatterParams.colors[1]];
         const colorNegFnc = d3.scaleLinear().domain([1, (typeof formatterParams.steps === 'undefined') ? 100 : formatterParams.steps]).range(colorsNeg);
@@ -190,8 +223,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["font-style"] = 'italic';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] }) }}
         if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
         if(typeof formatterParams.precision === "undefined"){formatterParams.precision = 0};
         if(typeof formatterParams.thousand === "undefined"){formatterParams.thousand = ","};
@@ -211,8 +250,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] }) }}
 
         //
         const params = Object.assign({}, {"precision": 0}, formatterParams);
@@ -236,8 +281,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] }) }}
 
         //
         const params = Object.assign({}, {"format": {'pos': "%v", 'neg': "(%v)", 'zero': " -- "}}, formatterParams);
@@ -254,10 +305,15 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             //
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]
-            })
-        }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]
+                })}}
 
         //
         const value = cell.getValue();
@@ -290,10 +346,16 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             //
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]
-            })
-        }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]
+                })
+        }}
 
         //
         const value = cell.getRow().getData()[formatterParams.pivot];
@@ -326,10 +388,16 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]
-            })
-        }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]
+                })
+        }}
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
         var value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
 
@@ -352,10 +420,16 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'right';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key]
-            })
-        }
+           var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key]
+                })
+        }}
         const colorFnc = d3.scaleLinear().domain([1, formatterParams.steps]).range(formatterParams.colors);
         var value = (typeof formatterParams.intensity === 'undefined') ? cell.getValue() : cell.getRow().getData()[formatterParams.intensity]
 
@@ -389,8 +463,14 @@ Tabulator.prototype.extendModule("format", "formatters", {
         cell.getElement().style["text-align"] = 'center';
         if (typeof formatterParams.css !== 'undefined'){
             // Update the CSS Style attributes
-            Object.keys(formatterParams.css).forEach(function(key){
-                cell.getElement().style[key] = formatterParams.css[key] }) }
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] }) }}
 
         const div = document.createElement('div');
         if (cell.getValue() === null){
