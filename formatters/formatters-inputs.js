@@ -11,14 +11,15 @@ Tabulator.prototype.extendModule("format", "formatters", {
                     cell.getElement().style[key] = value[formatterParams.cssField][key]});
             value = value[formatterParams.valField];
         } else {
-            Object.keys(formatterParams.css).forEach(function(key){
-                var applyCss = true;
-                if (typeof formatterParams.css.rules !== 'undefined'){
-                    Object.keys(formatterParams.css.rules).forEach(function(key){
-                        if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
-                        }
-                if(applyCss){
-                    cell.getElement().style[key] = formatterParams.css[key]})}}
+            var applyCss = true;
+            if (typeof formatterParams.css.rules !== 'undefined'){
+                Object.keys(formatterParams.css.rules).forEach(function(key){
+                    if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
+                    }
+            if(applyCss){
+                Object.keys(formatterParams.css).forEach(function(key){
+                    cell.getElement().style[key] = formatterParams.css[key] }) }
+        }
         return value;
     },
 
