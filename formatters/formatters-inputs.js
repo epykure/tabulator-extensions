@@ -16,7 +16,7 @@ Tabulator.prototype.extendModule("format", "formatters", {
                 if (typeof formatterParams.css.rules !== 'undefined'){
                     Object.keys(formatterParams.css.rules).forEach(function(key){
                         if (cell.getRow().getData()[key] != formatterParams.css.rules[key]){applyCss = false}})
-                    }
+                        }
                 if(applyCss){
                     cell.getElement().style[key] = formatterParams.css[key]})}}
         return value;
