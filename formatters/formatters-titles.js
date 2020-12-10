@@ -27,8 +27,18 @@ Tabulator.prototype.extendModule("format", "formatters", {
         var container = document.createElement("div");
         const iconHolder = document.createElement("i");
         iconHolder.style.margin = "auto";
-        iconHolder.className = "far fa-minus-square";
-        iconHolder.setAttribute("expanded", true);
+        if (typeof formatterParams.expanded !== 'undefined'){
+            if (!formatterParams.expanded){
+                iconHolder.className = "far fa-plus-square";
+                iconHolder.setAttribute("expanded", false)
+            } else {
+                iconHolder.className = "far fa-minus-square";
+                iconHolder.setAttribute("expanded", true)
+            }
+        } else {
+            iconHolder.className = "far fa-minus-square";
+            iconHolder.setAttribute("expanded", true)
+        }
         iconHolder.style["cursor"] = "pointer";
         iconHolder.addEventListener("click", function(){
             table = window[formatterParams.tableId];
