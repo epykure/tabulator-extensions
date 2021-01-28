@@ -334,7 +334,9 @@ Tabulator.prototype.extendModule("format", "formatters", {
             })
         }
 
-        return value;
+        if(typeof formatterParams.format === "undefined"){formatterParams.format = "%v"};
+        const params = Object.assign({}, {"precision": 0}, formatterParams);
+        return accounting.formatMoney(value, params);
     },
 
     //
